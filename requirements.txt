@@ -8,3 +8,4 @@ werkzeug
 joblib
 matplotlib
 seaborn
+shap
