@@ -6,3 +6,5 @@ scikit-learn
 plotly
 werkzeug
 joblib
+matplotlib
+seaborn
