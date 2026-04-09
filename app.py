@@ -958,7 +958,7 @@ elif page == "Organization Admin Panel":
                 if col1.button("Approve", key=f"approve_{r['id']}"):
                     update_request_status(r["id"], "approved")
                     st.success("Approved")
-                    st.experimental_rerun()
+                    st.rerun()
 
                 if col2.button("Reject", key=f"reject_{r['id']}"):
                     update_request_status(r["id"], "rejected")
