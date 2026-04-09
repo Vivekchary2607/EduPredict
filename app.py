@@ -11,7 +11,10 @@ from database import validate_global_student_id,is_request_already_sent,get_org_
 from database import raise_withdraw_request,get_withdraw_requests,approve_withdraw_request
 from database import get_platform_stats,get_prediction_count_by_org,get_prediction_distribution,get_predictions_by_org_stats,get_user_role_distribution
 from email_utils import send_invite_email,send_org_code_email
+from database import init_db, seed_initial_data
 
+init_db()
+seed_initial_data()
 # ---------- Session State Initialization ----------
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
