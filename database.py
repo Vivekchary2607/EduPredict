@@ -140,8 +140,32 @@ def init_db():
     conn.commit()
     conn.close()
 
+def seed_initial_data():
+    conn = get_connection()
+    cur = conn.cursor()
 
+    # ✅ Check if already initialized
+    cur.execute("SELECT COUNT(*) AS count FROM organizations")
+    result = cur.fetchone()
 
+    if result["count"] > 0:
+        conn.close()
+        return  # Already initialized → skip
+
+    # ✅ Create organization
+    org_code = create_organization("Sample_school", "vivek@gmail.com")
+
+    # ✅ Get org_id (important fix)
+    cur.execute("SELECT id FROM organizations WHERE org_code=%s", (org_code,))
+    org = cur.fetchone()
+    org_id = org["id"]
+
+    # ✅ Add users
+    add_user("admin", "admin123", org_id, "admin")
+    add_user("teacher1", "teach123", org_id, "teacher", "Math")
+    add_user("platform_admin", "admin1234", None, "super_admin")
+
+    conn.close()
 def add_user(username, password,org_id, role, subject=None):
     
     conn = get_connection()
