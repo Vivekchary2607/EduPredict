@@ -963,7 +963,7 @@ elif page == "Organization Admin Panel":
                 if col2.button("Reject", key=f"reject_{r['id']}"):
                     update_request_status(r["id"], "rejected")
                     st.warning("Rejected")
-                    st.experimental_rerun()
+                    st.rerun()
         with sub_tab1:
             sent = get_sent_requests(st.session_state.org_id)
 
