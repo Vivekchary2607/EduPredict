@@ -179,10 +179,8 @@ if not st.session_state.logged_in:
                 st.session_state.role = user["role"]
                 st.session_state.subject = user["subject"]
                 st.session_state.org_id = user["org_id"] 
-                try:
-                    st.rerun()
-                except:
-                    st.experimental_rerun()
+                st.rerun()
+                
             else:
                 st.error("Invalid credentials")
     elif choice == "Register":
@@ -308,10 +306,7 @@ if page == "Logout":
     st.session_state.role = None
     st.session_state.org_id = None
     st.session_state.username = None
-    try:
-        st.rerun()
-    except:
-        st.experimental_rerun()
+    st.rerun()
 
 # ------------------- Single Prediction -------------------
 if page == "Single Prediction":
@@ -1012,8 +1007,5 @@ elif page == "Organization Admin Panel":
         if st.button("Clear My Organization Predictions", key="clear_org_preds"):
             clear_predictions_by_org(st.session_state.org_id)
             st.success("Predictions cleared.")
-            try:
-                st.rerun()
-            except:
-                st.experimental_rerun()
+            st.rerun()
 
