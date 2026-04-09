@@ -1,8 +1,10 @@
 import smtplib
 from email.message import EmailMessage
 
-EMAIL_ADDRESS = "guduruvivekcharyg34pythonml@gmail.com"
-EMAIL_PASSWORD = "kyhodmjrxpaixvit"
+
+import os
+EMAIL_ADDRESS = os.getenv("EMAIL_USER")
+EMAIL_PASSWORD =os.getenv("EMAIL_PASS")
 
 def send_invite_email(to_email, invite_code, expiry):
     msg = EmailMessage()
