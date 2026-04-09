@@ -12,21 +12,32 @@ import psycopg2
 from psycopg2.extras import RealDictCursor
 from urllib.parse import urlparse
 
-def get_connection():
-    DATABASE_URL = os.getenv("DATABASE_URL")  # ✅ only the variable name here
+# def get_connection():
+#     DATABASE_URL = os.getenv("DATABASE_URL")  # ✅ only the variable name here
 
-    if DATABASE_URL:
-        # PostgreSQL (Production)
-        result = urlparse(DATABASE_URL)
-        conn = psycopg2.connect(
-            database=result.path[1:],   # strip leading '/'
-            user=result.username,
-            password=result.password,
-            host=result.hostname,
-            port=result.port,
-            cursor_factory=RealDictCursor
-        )
-        return conn
+#     if DATABASE_URL:
+#         # PostgreSQL (Production)
+#         result = urlparse(DATABASE_URL)
+#         conn = psycopg2.connect(
+#             database=result.path[1:],   # strip leading '/'
+#             user=result.username,
+#             password=result.password,
+#             host=result.hostname,
+#             port=result.port,
+#             cursor_factory=RealDictCursor
+#         )
+#         return conn
+
+import psycopg2
+import os
+from psycopg2.extras import RealDictCursor
+
+def get_connection():
+    return psycopg2.connect(
+        os.getenv("DATABASE_URL"),
+        cursor_factory=RealDictCursor,
+        sslmode="require"
+    )
 def init_db():
     conn = get_connection()
     c = conn.cursor()
